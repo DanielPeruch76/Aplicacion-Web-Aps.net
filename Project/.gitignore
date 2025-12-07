@@ -1,0 +1,55 @@
+## Ignorar archivos de VS/VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Ignorar resultados de compilación
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+[Bb]uildOutput/
+
+## Ignorar paquetes NuGet
+[Nn]u[Gg]et/
+*.nupkg
+packages/
+**/packages/*
+!**/packages/build/
+
+## Archivos específicos de .NET
+*.cache
+*.docstates
+_ReSharper*/
+*.resharper
+*.log
+*.njsproj
+*.sln
+*.sw?
+
+## Configuraciones locales
+appsettings.Development.json
+appsettings.Local.json
+launchSettings.json
+appsettings.json
+
+## Archivos de publicación
+publish/
+*.pubxml
+
+## Otros
+*.sql
+*.sqlproj
+*.sqlite
+.DS_Store
+*.pyc
+*~
