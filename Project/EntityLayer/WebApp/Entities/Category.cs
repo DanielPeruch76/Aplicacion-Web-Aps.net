@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.WebApp.Entities
 {
-    public class Category : BaseEntity
+    public class Category : BaseEntity<int>
     {
         public string Name { get; set; } = null!;
         List<Portafolio> Portafolios { get; set; } = null!;

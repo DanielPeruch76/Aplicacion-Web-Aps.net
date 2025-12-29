@@ -1,13 +1,7 @@
 ﻿using CoreLayer.BaseEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace EntityLayer.WebApp.Entities
 {
-    public class Service : BaseEntity
+    public class Service : BaseEntity<int>
     {
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CoreLayer.BaseEntities
 {
-    public class BaseEntity : IBaseEntity
+    public class BaseEntity<PK> : IBaseEntity<PK>
     {
-        public virtual int Id { get; set; }
+        public virtual PK Id { get; set; }
         public virtual string CreateDate { get; set; } = DateTime.Now.ToString("d");
         public virtual string? UpdateDate { get; set; }
         public virtual byte[] RowVersion { get; set; } = null!;

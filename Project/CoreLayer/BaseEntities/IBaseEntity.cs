@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CoreLayer.BaseEntities
 {
-    public interface IBaseEntity
+    public interface IBaseEntity <PK>
     {
+        PK Id { get; set; }
     }
 }

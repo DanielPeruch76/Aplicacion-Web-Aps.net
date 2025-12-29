@@ -1,5 +1,6 @@
 //Esto es para importar el LoadRepositoryLayerExtensions
 using RepositoryLayer.Extensions;
+using ServiceLayer.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //Se añade esto:
 builder.Services.LoadRepositoryLayerExtensions(builder.Configuration);
+builder.Services.LoadServiceLayerExtensions();
 
 var app = builder.Build();
 
@@ -25,8 +27,23 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+#pragma warning disable ASP0014
+app.UseEndpoints(endpoint =>
+{
+    endpoint.MapAreaControllerRoute(
+        name: "Admin",
+        areaName : "Admin",
+        pattern : "Admin/{controller=Dashboard}/{action=Index}/{id?}"
+    );
+    endpoint.MapAreaControllerRoute(
+        name: "Admin",
+        areaName: "Admin",
+        pattern: "Admin/{controller=AboutUs}/{action=GetAboutUsList}/{id?}"
+    );
+    endpoint.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+});
 
 app.Run();

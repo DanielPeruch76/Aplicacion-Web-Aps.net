@@ -1,13 +1,7 @@
 ﻿using CoreLayer.BaseEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace EntityLayer.WebApp.Entities
 {
-    public class SocialMedia : BaseEntity
+    public class SocialMedia : BaseEntity<int>
     {
         public string? Twitter { get; set; }
         public string? Linkedin { get; set; }
