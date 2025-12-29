@@ -1,6 +1,6 @@
 ﻿using EntityLayer.WebApp.ViewModels.Contact;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Services.Abstract;
+using ServiceLayer.Services.WebApp.Abstract;
 
 namespace Project.Areas.Admin.Controllers
 {

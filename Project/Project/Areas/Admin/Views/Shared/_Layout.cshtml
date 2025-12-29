@@ -48,14 +48,14 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-                <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-                <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Services</a></li>
-                <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Team</a></li>
-                <li><a href="#services"><i class="bi bi-people-fill navicon"></i> Testimonials</a></li>
-                <li><a href="#services"><i class="bi bi-tags-fill navicon"></i> Category</a></li>
-                <li><a href="#services"><i class="bi bi-file-earmark-richtext navicon"></i> Portafolio</a></li>
-                <li><a href="#services"><i class="bi bi-person-rolodex navicon"></i> Contact</a></li>
+                <li><a asp-area="Admin" asp-controller="HomePage" asp-action="GetHomePageList" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
+                <li><a asp-area="Admin" asp-controller="AboutUs" asp-action="GetAboutUsList"><i class="bi bi-person navicon"></i> About</a></li>
+                <li><a asp-area="Admin" asp-controller="Service" asp-action="GetServiceList"><i class="bi bi-file-earmark-text navicon"></i> Services</a></li>
+                <li><a asp-area="Admin" asp-controller="Team" asp-action="GetTeamList"><i class="bi bi-images navicon"></i> Team</a></li>
+                <li><a asp-area="Admin" asp-controller="Testimonial" asp-action="GetTestimonialList"><i class="bi bi-people-fill navicon"></i> Testimonials</a></li>
+                <li><a asp-area="Admin" asp-controller="Category" asp-action="GetCategoryList"><i class="bi bi-tags-fill navicon"></i> Category</a></li>
+                <li><a asp-area="Admin" asp-controller="Portafolio" asp-action="GetPortafolioList"><i class="bi bi-file-earmark-richtext navicon"></i> Portafolio</a></li>
+                <li><a asp-area="Admin" asp-controller="ContactUs" asp-action="GetContactUsList"><i class="bi bi-person-rolodex navicon"></i> Contact</a></li>
                 <li><a href="#services"><i class="bi bi-tools navicon"></i> User Settings</a></li>
             </ul>
         </nav>
