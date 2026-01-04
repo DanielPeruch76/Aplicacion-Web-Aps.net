@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace ServiceLayer.FluentValidation.WebApp.TeamValidation
 {
-    public class TeamUpdateValidation : AbstractValidator<TeamAddVM>
+    public class TeamUpdateValidation : AbstractValidator<TeamUpdateVM>
     {
         public TeamUpdateValidation()
         {

@@ -1,5 +1,6 @@
 ﻿using EntityLayer.WebApp.ViewModels.AboutUsVM;
 using FluentValidation;
+using ServiceLayer.Messages.WebApp;
 
 namespace ServiceLayer.FluentValidation.WebApp.AboutValidation
 {
@@ -8,36 +9,36 @@ namespace ServiceLayer.FluentValidation.WebApp.AboutValidation
         public AboutUsAddValidation()
         {
             RuleFor(x => x.Header)
-                .NotEmpty()
-                .NotNull()
-                .MaximumLength(200);
+                .NotEmpty().WithMessage(ValidationMessages.NullEmptyMessage("Header"))
+                .NotNull().WithMessage(ValidationMessages.NullEmptyMessage("Header"))
+                .MaximumLength(200).WithMessage(ValidationMessages.MaxinumCharachterAllowence("Header", 200));
             RuleFor(x => x.Description)
-                .NotEmpty()
-                .NotNull()
-                .MaximumLength(5000);
+                .NotEmpty().WithMessage(ValidationMessages.NullEmptyMessage("Descripcion"))
+                .NotNull().WithMessage(ValidationMessages.NullEmptyMessage("Descripcion"))
+                .MaximumLength(5000).WithMessage(ValidationMessages.MaxinumCharachterAllowence("Descripcion", 5000));
             RuleFor(x => x.Clients)
-                .NotEmpty()
-                .NotNull()
-                .GreaterThan(0)
-                .LessThan(100);
+                .NotEmpty().WithMessage(ValidationMessages.NullEmptyMessage("Clients"))
+                .NotNull().WithMessage(ValidationMessages.NullEmptyMessage("Clients"))
+                .GreaterThan(0).WithMessage(ValidationMessages.GreaterThanMessage("Clients",0))
+                .LessThan(100).WithMessage(ValidationMessages.LessThanMessage("Clients", 100));
             RuleFor(x => x.Projects)
-                .NotEmpty()
-                .NotNull()
-                .GreaterThan(0)
-                .LessThan(100);
+                .NotEmpty().WithMessage(ValidationMessages.NullEmptyMessage("Projects"))
+                .NotNull().WithMessage(ValidationMessages.NullEmptyMessage("Projects"))
+                .GreaterThan(0).WithMessage(ValidationMessages.GreaterThanMessage("Projects", 0))
+                .LessThan(100).WithMessage(ValidationMessages.LessThanMessage("Projects", 100));
             RuleFor(x => x.HoursOfSupport)
-                .NotEmpty()
-                .NotNull()
-                .GreaterThan(0)
-                .LessThan(100);
+                .NotEmpty().WithMessage(ValidationMessages.NullEmptyMessage("Hours of Support"))
+                .NotNull().WithMessage(ValidationMessages.NullEmptyMessage("Hours of Suport"))
+                .GreaterThan(0).WithMessage(ValidationMessages.GreaterThanMessage("Hours of Support", 0))
+                .LessThan(100).WithMessage(ValidationMessages.LessThanMessage("Hours of Support", 100));
             RuleFor(x => x.HardWorkers)
-                .NotEmpty()
-                .NotNull()
-                .GreaterThan(0)
-                .LessThan(100);
+                .NotEmpty().WithMessage(ValidationMessages.NullEmptyMessage("Hard Workers"))
+                .NotNull().WithMessage(ValidationMessages.NullEmptyMessage("Hard Workers"))
+                .GreaterThan(0).WithMessage(ValidationMessages.GreaterThanMessage("Hard Workers", 0))
+                .LessThan(100).WithMessage(ValidationMessages.LessThanMessage("Hard Workers", 100));
             RuleFor(x => x.Photo)
-                .NotEmpty()
-                .NotNull();
+                .NotEmpty().WithMessage(ValidationMessages.NullEmptyMessage("Photo"))
+                .NotNull().WithMessage(ValidationMessages.NullEmptyMessage("Photo"));
         }
     }
 }

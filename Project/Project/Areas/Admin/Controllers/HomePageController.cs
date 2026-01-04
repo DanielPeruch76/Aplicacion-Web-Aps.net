@@ -1,4 +1,6 @@
 ﻿using EntityLayer.WebApp.ViewModels.HomePage;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.WebApp.Abstract;
 
@@ -8,6 +10,8 @@ namespace Project.Areas.Admin.Controllers
     public class HomePageController : Controller
     {
         private readonly IHomePageService _homePageService;
+        private readonly IValidator<HomePageAddVM> _addValidator;
+        private readonly IValidator<HomePageUpdateVM> _updateValidator;
 
         public HomePageController(IHomePageService homePageService)
         {
@@ -29,8 +33,14 @@ namespace Project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddHomePage(HomePageAddVM request)
         {
-            await _homePageService.AddAsync(request);
-            return RedirectToAction("GetHomePageList", "HomePage", new { Area = ("Admin") });
+            var validation = await _addValidator.ValidateAsync(request);
+            if (validation.IsValid)
+            {
+                await _homePageService.AddAsync(request);
+                return RedirectToAction("GetHomePageList", "HomePage", new { Area = ("Admin") });
+            }
+            validation.AddToModelState(this.ModelState);
+            return View();
         }
 
         [HttpGet]
@@ -43,8 +53,15 @@ namespace Project.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateHomePage(HomePageUpdateVM request)
         {
-            await _homePageService.UpDateAsync(request);
-            return RedirectToAction("GetHomePageList", "HomePage", new { Area = ("Admin") });
+            var validation = await _updateValidator.ValidateAsync(request);
+            if (validation.IsValid)
+            {
+                await _homePageService.UpDateAsync(request);
+                return RedirectToAction("GetHomePageList", "HomePage", new { Area = ("Admin") });
+            }
+            validation.AddToModelState(this.ModelState);
+            return View();
+
         }
 
         public async Task<IActionResult> DeleteHomePage(int id)

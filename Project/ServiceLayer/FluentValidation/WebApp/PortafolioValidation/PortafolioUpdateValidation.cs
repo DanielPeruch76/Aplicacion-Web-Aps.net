@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace ServiceLayer.FluentValidation.WebApp.PortafolioValidation
 {
-    public class PortafolioUpdateValidation : AbstractValidator<PortafolioAddVM>
+    public class PortafolioUpdateValidation : AbstractValidator<PortafolioUpdateVM>
     {
         public PortafolioUpdateValidation()
         {
