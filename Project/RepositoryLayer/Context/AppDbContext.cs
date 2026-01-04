@@ -1,11 +1,12 @@
-﻿using EntityLayer.WebApp.Entities;
+﻿using EntityLayer.Identity.Entities;
+using EntityLayer.WebApp.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace RepositoryLayer.Context
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<AppUser,AppRole,string>
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
