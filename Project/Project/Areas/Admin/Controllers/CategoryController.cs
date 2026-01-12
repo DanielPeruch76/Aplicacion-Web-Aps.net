@@ -1,11 +1,13 @@
 ﻿using EntityLayer.WebApp.ViewModels.Category;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Services.WebApp.Abstract;
 
 namespace Project.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class CategoryController : Controller
     {

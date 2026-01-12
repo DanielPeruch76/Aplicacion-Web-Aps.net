@@ -13,14 +13,18 @@ namespace Project.Controllers
     public class AuthenticationController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IValidator<SignUpVM> _signUpValidator;
+        private readonly IValidator<LogInVM> _loginValidator;
         private readonly IMapper _iMapper;
 
-        public AuthenticationController(UserManager<AppUser> userManager, IValidator<SignUpVM> signUpValidator, IMapper iMapper)
+        public AuthenticationController(UserManager<AppUser> userManager, IValidator<SignUpVM> signUpValidator, IMapper iMapper, SignInManager<AppUser> signInManager, IValidator<LogInVM> loginValidator)
         {
             _userManager = userManager;
             _signUpValidator = signUpValidator;
             _iMapper = iMapper;
+            _signInManager = signInManager;
+            _loginValidator = loginValidator;
         }
 
         [HttpGet]
@@ -53,6 +57,7 @@ namespace Project.Controllers
 
             if (!userCreateResult.Succeeded)
             {
+                ViewBag.Result = "NotSucceed";
                 foreach (var error in userCreateResult.Errors)
                 {
                     Debug.WriteLine($"Error UserManager: {error.Code} - {error.Description}");
@@ -62,6 +67,50 @@ namespace Project.Controllers
                 return View(request);
             }
             return RedirectToAction("LogIn", "Authentication");
+        }
+
+        [HttpGet]
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LogInVM request, string? returnUrl=null)
+        {
+            returnUrl = returnUrl ?? Url.Action("Index", "Dashboard", new { Area = "Admin"});   
+            var validation = await _loginValidator.ValidateAsync(request);
+            if (!validation.IsValid)
+            {
+                ViewBag.Result = "NotSucceed";
+                validation.AddToModelState(this.ModelState);
+                return View();
+            }
+            var hasUser = await _userManager.FindByEmailAsync(request.Email);
+            if (hasUser == null) 
+            {
+                ViewBag.Result = "NotSucceed";
+                ModelState.AddModelErrorList(new List<string> { "Email or password is wrong" });
+                return View();
+            }
+
+            var logInResult = await _signInManager.PasswordSignInAsync(hasUser, request.Password, request.RememberMe, true);
+
+            if (logInResult.Succeeded) 
+            {
+                return Redirect(returnUrl!);
+            }
+
+            if (logInResult.IsLockedOut) 
+            { 
+                ViewBag.ReturnUrl = "LockedOut";
+                ModelState.AddModelErrorList(new List<string> {"Your account is locked our for 60 seconds!"});
+                return View();
+            }
+
+            ViewBag.ReturnUrl = "FailedAttempt";
+            ModelState.AddModelErrorList(new List<string> { "Email or password is wrong", $"Failed Attempt: {await _userManager.GetAccessFailedCountAsync(hasUser)}" });
+            return View();
         }
     }
 }
